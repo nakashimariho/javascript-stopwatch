@@ -6,9 +6,9 @@ let timeArea = document.getElementById('time');
 let time = 0;
 let timerId = null;
 
-//console.log(startButton);
 
 startButton.addEventListener('click', (event)=>{
+  if (timerId !== null){return;}
   timerId = setInterval(() => {
   time += 100;
   timeArea.innerText = formatTime(time);
@@ -17,13 +17,13 @@ startButton.addEventListener('click', (event)=>{
 
 stopButton.addEventListener('click', (event)=>{
   clearInterval(timerId);
+  timerId = null;
 });
 
 resetButton.addEventListener('click',(event)=>{
   timeArea.textContent = '00:00:00:000'
-
-
 })
+
 
 function formatTime(time) {
   let msec = time % 1000;
@@ -39,5 +39,4 @@ function formatTime(time) {
   let hStr = hour.toString().padStart(2,'0');
   
   return  hStr + ':' + mStr+ ':' + sStr + ':' + msStr ;
-  
 }
